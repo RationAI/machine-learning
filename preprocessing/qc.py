@@ -10,6 +10,11 @@ from rationai.mlkit.lightning.loggers import MLFlowLogger
 from tqdm.asyncio import tqdm
 
 
+def log_error(log_path: Path, message: str) -> None:
+    with open(log_path, "a") as log_file:
+        log_file.write(message)
+
+
 async def qc_main(output_path: str, slides: list[str]) -> None:
     async with rationai.AsyncClient() as client:
         async for result in tqdm(
@@ -17,10 +22,11 @@ async def qc_main(output_path: str, slides: list[str]) -> None:
             total=len(slides),
         ):
             if not result.success:
-                with open(Path(output_path) / "qc_errors.log", "a") as log_file:
-                    log_file.write(
-                        f"Failed to process {result.wsi_path}: {result.error}\n"
-                    )
+                await asyncio.to_thread(
+                    log_error,
+                    Path(output_path) / "qc_errors.log",
+                    f"Failed to process {result.wsi_path}: {result.error}\n",
+                )
 
         await client.qc.generate_report(
             backgrounds=slides,
