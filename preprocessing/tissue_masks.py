@@ -35,7 +35,6 @@ def main(config: DictConfig, logger: MLFlowLogger) -> None:
         ray.data.from_items([{"path": str(path)} for path in slides_path]).map(
             process_slide,
             fn_kwargs={"level": config.level, "output_path": Path(output_dir)},
-            concurrency=config.max_concurrent,
             memory=3 * 1024**3,
         ).materialize()
 
