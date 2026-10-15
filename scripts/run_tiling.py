@@ -9,7 +9,7 @@ submit_job(
     memory="32Gi",  # approximately 4GiB per process
     public=False,
     script=[
-        "git clone https://gitlab.ics.muni.cz/rationai/digital-pathology/pathology/project_name workdir",
+        "git clone https://github.com/RationAI/project_name.git workdir",
         "cd workdir",
         "uv sync",
         "uv run -m preprocessing.tiling +experiment=preprocessing/<experiment_name>",

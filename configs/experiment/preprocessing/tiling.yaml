@@ -3,6 +3,7 @@
 defaults:
   - _self_
 
+mpp: 0.5
 tile_size: 512
 stride: 256
 
