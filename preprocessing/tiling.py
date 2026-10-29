@@ -6,6 +6,7 @@ import hydra
 from omegaconf import DictConfig
 from rationai.mlkit import autolog, with_cli_args
 from rationai.mlkit.lightning.loggers import MLFlowLogger
+from rationai.provenance import log_provenance
 from ratiopath.ray import read_slides
 from ratiopath.tiling import grid_tiles
 from ratiopath.tiling.utils import row_hash
@@ -52,6 +53,7 @@ def main(config: DictConfig, logger: MLFlowLogger) -> None:
             local_dir=output_dir, artifact_path=config.mlflow_artifact_path
         )
 
+    log_provenance(logger=logger, config=config)  # links this run to user, git, image, inputs
 
 if __name__ == "__main__":
     main()  # pylint: disable=no-value-for-parameter

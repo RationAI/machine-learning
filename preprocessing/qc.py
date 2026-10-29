@@ -7,6 +7,7 @@ import rationai
 from omegaconf import DictConfig
 from rationai.mlkit import autolog, with_cli_args
 from rationai.mlkit.lightning.loggers import MLFlowLogger
+from rationai.provenance import log_provenance
 from tqdm.asyncio import tqdm
 
 
@@ -54,6 +55,7 @@ def main(config: DictConfig, logger: MLFlowLogger) -> None:
         )
         logger.log_artifacts(local_dir=tmp_dir)
 
+    log_provenance(logger=logger, config=config)  # links this run to user, git, image, inputs
 
 if __name__ == "__main__":
     main()  # pylint: disable=no-value-for-parameter

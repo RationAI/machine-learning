@@ -12,6 +12,7 @@ dependencies = [
     "mlflow>=3.10.1",
     "rationai-sdk>=0.1.0",
     "rationai-mlkit",
+    "rationai-provenance",
     "ratiopath>=1.5.0",
 ]
 
@@ -19,6 +20,7 @@ dependencies = [
 job = ["rationai-kube-jobs"]
 
 [tool.uv.sources]
+rationai-provenance = { git = "https://github.com/RationAI/provenance.git" }
 rationai-sdk = { git = "https://github.com/RationAI/rationai-sdk-python.git" }
 rationai-kube-jobs = { git = "ssh://git@gitlab.ics.muni.cz/rationai/infrastructure/kube-jobs" }
 rationai-mlkit = { git = "https://github.com/RationAI/mlkit.git" }

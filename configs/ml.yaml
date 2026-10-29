@@ -7,8 +7,18 @@ seed: ${random_seed:}
 mode: ???
 checkpoint: null
 
-trainer: {}
+# Provenance — paste the values the registration printed (see README,
+# "Provenance"). Left null, training runs unverified (best effort).
+dataset:
+  run_id: null       # register_dataset's printed run_id — training verifies the disk against it
+  split_uris: null   # e.g. {train: 'mlflow-artifacts:/<exp_id>/<run_id>/artifacts/train.csv', test: '...'}
 
+trainer:
+  callbacks:
+    - _target_: rationai.provenance.lightning.ProvenanceCallback
+      fail_fast: true              # abort training if the disk no longer matches the registration
+      dataset_run_id: ${dataset.run_id}
+      split_uris: ${dataset.split_uris}   # referenced, not recomputed
 data: {}
 
 model: {}
