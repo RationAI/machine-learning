@@ -86,7 +86,7 @@ This project uses [Hydra](https://hydra.cc/) for configuration management.
 
 Every run in this repo is provenance-tracked via [rationai-provenance](https://github.com/RationAI/provenance): preprocessing apps call `log_provenance`, and the training run gets the `ProvenanceCallback` (already wired in [`configs/ml.yaml`](configs/ml.yaml)). Runs link to the user who started them, the dataset registration, the git commit, the Docker image and the hardware — an unregistered user fails the run at startup.
 
-Prerequisites (see the [provenance template](https://github.com/RationAI/prov-ml-template) for the full pipeline with splits and embeddings) — as kube-jobs, same style as the other `scripts/`: `uv run python scripts/create_user.py`, `scripts/register_dataset.py`, `scripts/register_embeddings.py`:
+Prerequisites — as kube-jobs, same style as the other `scripts/`: `uv run python scripts/create_user.py`, `scripts/register_dataset.py`, `scripts/register_embeddings.py`:
 
 ```bash
 export MLFLOW_TRACKING_URI=...  # your MLflow server
