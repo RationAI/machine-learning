@@ -3,7 +3,6 @@ from kube_jobs import storage, submit_job
 
 submit_job(
     job_name="project_name-create-user",
-    username=...,
     image="cerit.io/rationai/base:2.0.6",
     cpu=1,
     memory="4Gi",
